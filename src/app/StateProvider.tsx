@@ -16,15 +16,6 @@ interface Action {
   value: string;
 }
 
-const initialState: State = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  phone: "",
-  address: "",
-  title: "",
-};
-
 function reducer(state: State, action: Action): State {
   switch (action.type) {
     case "SET_FIELD":
@@ -40,7 +31,7 @@ function reducer(state: State, action: Action): State {
 const StateContext = createContext<State | undefined>(undefined);
 const DispatchContext = createContext<React.Dispatch<Action> | undefined>(undefined);
 
-export function StateProvider({ children }: { children: ReactNode }) {
+export function StateProvider({ children, initialState }: { children: ReactNode, initialState: State }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
