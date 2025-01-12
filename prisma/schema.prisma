@@ -8,20 +8,124 @@ generator client {
   provider = "prisma-client-js"
 }
 
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-
-model User {
-  id Int @id @default(autoincrement())
+model Users {
+  id       Int       @id @default(autoincrement())
+  name     String
+  email    String
   username String
-  name String
+  password String
+  resumes  Resumes[]
 }
 
-model Resume{
+model Resume_user_info {
+  id              Int       @id @default(autoincrement())
+  user_first_name String
+  user_last_name  String
+  user_heading    String
+  user_email      String
+  user_phone      String
+  user_address    String
+  Resume          Resumes[]
+}
+
+model Resumes {
+  id                  Int      @id @default(autoincrement())
+  user_id             Int
+  created_at          DateTime @default(now())
+  updated_at          DateTime @updatedAt
+  template_id         Int
+  resume_user_info_id Int
+
+  user                   Users                    @relation(fields: [user_id], references: [id])
+  resume_user_info       Resume_user_info         @relation(fields: [resume_user_info_id], references: [id])
+  Skills_categories      Skills_categories[]
+  certifications_resumes certifications_resumes[]
+  works_resumes          works_resumes[]
+  links_networks         links_networks[]
+}
+
+model Skills_categories {
+  id         Int    @id @default(autoincrement())
+  skill_type String
+  resume_id  Int
+
+  resume Resumes  @relation(fields: [resume_id], references: [id])
+  Skills Skills[]
+}
+
+model Skills {
+  id                Int    @id @default(autoincrement())
+  skill_name        String
+  skill_category_id Int
+
+  category Skills_categories @relation(fields: [skill_category_id], references: [id])
+}
+
+model Certificacion_info {
   id Int @id @default(autoincrement())
-  data Json
+
+  certificacion_name        String
+  certificacion_institution String
+  url                       String
+  sort_order                Int
+  resume_id                 Int
+
+  certifications_resumes certifications_resumes[]
+}
+
+model certifications_resumes {
+  id                    Int @id @default(autoincrement())
+  resume_id             Int
+  certificacion_info_id Int
+
+  Resume             Resumes            @relation(fields: [resume_id], references: [id])
+  Certificacion_info Certificacion_info @relation(fields: [certificacion_info_id], references: [id])
+}
+
+model Work_info {
+  id Int @id @default(autoincrement())
+
+  work_title       String
+  work_company     String
+  work_start_date  DateTime
+  work_end_date    DateTime
+  work_description String
+  work_location    String
+  sort_order       Int
+  current_job      Boolean
+  works_resumes    works_resumes[]
+}
+
+model works_resumes {
+  id           Int @id @default(autoincrement())
+  resume_id    Int
+  work_info_id Int
+
+  Resume    Resumes   @relation(fields: [resume_id], references: [id])
+  Work_info Work_info @relation(fields: [work_info_id], references: [id])
+}
+
+model link_info {
+  id Int @id @default(autoincrement())
+
+  network_id Int
+  url        String
+  username   String
+
+  links_networks links_networks[]
+}
+
+model links_networks {
+  id           Int    @id @default(autoincrement())
+  network_name String
+  resume_id    Int
+
+  link_info   link_info? @relation(fields: [link_infoId], references: [id])
+  link_infoId Int?
+  Resume      Resumes    @relation(fields: [resume_id], references: [id])
 }
