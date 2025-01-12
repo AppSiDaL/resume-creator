@@ -91,10 +91,10 @@ const PersonalInfoContent = () => {
           />
         </div>
       </form>
-      );
     </div>
   );
 };
+
 
 export default function PersonalInfoDropdown() {
   const [isOpen, setIsOpen] = useState(false);
