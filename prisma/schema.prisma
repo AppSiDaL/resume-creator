@@ -13,16 +13,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Users {
+model users {
   id       Int       @id @default(autoincrement())
   name     String
   email    String
   username String
   password String
-  resumes  Resumes[]
+  resumes  resumes[]
 }
 
-model Resume_user_info {
+model resume_user_info {
   id              Int       @id @default(autoincrement())
   user_first_name String
   user_last_name  String
@@ -30,10 +30,10 @@ model Resume_user_info {
   user_email      String
   user_phone      String
   user_address    String
-  Resume          Resumes[]
+  Resume          resumes[]
 }
 
-model Resumes {
+model resumes {
   id                  Int      @id @default(autoincrement())
   user_id             Int
   created_at          DateTime @default(now())
@@ -41,32 +41,32 @@ model Resumes {
   template_id         Int
   resume_user_info_id Int
 
-  user                   Users                    @relation(fields: [user_id], references: [id])
-  resume_user_info       Resume_user_info         @relation(fields: [resume_user_info_id], references: [id])
-  Skills_categories      Skills_categories[]
+  user                   users                    @relation(fields: [user_id], references: [id])
+  resume_user_info       resume_user_info         @relation(fields: [resume_user_info_id], references: [id])
+  Skills_categories      skills_categories[]
   certifications_resumes certifications_resumes[]
   works_resumes          works_resumes[]
   links_networks         links_networks[]
 }
 
-model Skills_categories {
+model skills_categories {
   id         Int    @id @default(autoincrement())
   skill_type String
   resume_id  Int
 
-  resume Resumes  @relation(fields: [resume_id], references: [id])
-  Skills Skills[]
+  resume resumes  @relation(fields: [resume_id], references: [id])
+  Skills skills[]
 }
 
-model Skills {
+model skills {
   id                Int    @id @default(autoincrement())
   skill_name        String
   skill_category_id Int
 
-  category Skills_categories @relation(fields: [skill_category_id], references: [id])
+  category skills_categories @relation(fields: [skill_category_id], references: [id])
 }
 
-model Certificacion_info {
+model certificacion_info {
   id Int @id @default(autoincrement())
 
   certificacion_name        String
@@ -83,11 +83,11 @@ model certifications_resumes {
   resume_id             Int
   certificacion_info_id Int
 
-  Resume             Resumes            @relation(fields: [resume_id], references: [id])
-  Certificacion_info Certificacion_info @relation(fields: [certificacion_info_id], references: [id])
+  Resume             resumes            @relation(fields: [resume_id], references: [id])
+  Certificacion_info certificacion_info @relation(fields: [certificacion_info_id], references: [id])
 }
 
-model Work_info {
+model work_info {
   id Int @id @default(autoincrement())
 
   work_title       String
@@ -106,8 +106,8 @@ model works_resumes {
   resume_id    Int
   work_info_id Int
 
-  Resume    Resumes   @relation(fields: [resume_id], references: [id])
-  Work_info Work_info @relation(fields: [work_info_id], references: [id])
+  Resume    resumes   @relation(fields: [resume_id], references: [id])
+  Work_info work_info @relation(fields: [work_info_id], references: [id])
 }
 
 model link_info {
@@ -127,5 +127,5 @@ model links_networks {
 
   link_info   link_info? @relation(fields: [link_infoId], references: [id])
   link_infoId Int?
-  Resume      Resumes    @relation(fields: [resume_id], references: [id])
+  Resume      resumes    @relation(fields: [resume_id], references: [id])
 }

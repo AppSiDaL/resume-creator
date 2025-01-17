@@ -1,19 +1,12 @@
 import { StateProvider } from "@/app/StateProvider";
 import DeatilsForm from "@/app/ui/create/DetailsForm";
 import Resume from "@/app/ui/create/Resume";
-import { getUsers } from "@/app/lib/data";
+import { getResumeUserInfo } from "@/app/lib/data";
 
 const getServerSideProps = async () => {
-  const data = await getUsers();
+  const data = await getResumeUserInfo();
   return {
-    initialState: {
-      firstName: data.firstName || "",
-      lastName: data.lastName || "",
-      email: data.email || "",
-      phone: data.phone || "",
-      address: data.address || "",
-      title: data.title || "",
-    },
+    initialState: data
   };
 };
 

@@ -33,12 +33,80 @@ const skills_categories = [
     skill_type: "Programming Languages",
     resume_id: 1,
   },
+  {
+    skill_type: "Databases",
+    resume_id: 1,
+  },
+  {
+    skill_type: "Operating Systems",
+    resume_id: 1,
+  },
+  {
+    skill_type: "Frameworks",
+    resume_id: 1,
+  },
 ];
 
 const skills = [
   {
     skill_name: "JavaScript",
     skill_category_id: 1,
+  },
+  {
+    skill_name: "Python",
+    skill_category_id: 1,
+  },
+  {
+    skill_name: "Java",
+    skill_category_id: 1,
+  },
+  {
+    skill_name: "SQL",
+    skill_category_id: 2,
+  },
+  {
+    skill_name: "MongoDB",
+    skill_category_id: 2,
+  },
+  {
+    skill_name: "PostgreSQL",
+    skill_category_id: 2,
+  },
+  {
+    skill_name: "Linux",
+    skill_category_id: 3,
+  },
+  {
+    skill_name: "Windows",
+    skill_category_id: 3,
+  },
+  {
+    skill_name: "MacOS",
+    skill_category_id: 3,
+  },
+  {
+    skill_name: "React",
+    skill_category_id: 4,
+  },
+  {
+    skill_name: "Node.js",
+    skill_category_id: 4,
+  },
+  {
+    skill_name: "Spring",
+    skill_category_id: 4,
+  },
+  {
+    skill_name: "Flask",
+    skill_category_id: 4,
+  },
+  {
+    skill_name: "Django",
+    skill_category_id: 4,
+  },
+  {
+    skill_name: "Express.js",
+    skill_category_id: 4,
   },
 ];
 
@@ -50,12 +118,56 @@ const certificacion_info = [
     sort_order: 1,
     resume_id: 1,
   },
+  {
+    certificacion_name: "Certified Kubernetes Application Developer",
+    certificacion_institution: "CNCF",
+    url: "https://www.cncf.io/certification/ckad/",
+    sort_order: 2,
+    resume_id: 1,
+  },
+  {
+    certificacion_name: "AWS Certified Solutions Architect - Associate",
+    certificacion_institution: "Amazon Web Services",
+    url: "https://aws.amazon.com/certification/certified-solutions-architect-associate/",
+    sort_order: 3,
+    resume_id: 1,
+  },
+  {
+    certificacion_name: "AWS Certified Developer - Associate",
+    certificacion_institution: "Amazon Web Services",
+    url: "https://aws.amazon.com/certification/certified-developer-associate/",
+    sort_order: 4,
+    resume_id: 1,
+  },
+  {
+    certificacion_name: "AWS Certified SysOps Administrator - Associate",
+    certificacion_institution: "Amazon Web Services",
+    url: "https://aws.amazon.com/certification/certified-sysops-admin-associate/",
+    sort_order: 5,
+    resume_id: 1,
+  },
 ];
 
 const certifications_resumes = [
   {
     resume_id: 1,
     certificacion_info_id: 1,
+  },
+  {
+    resume_id: 1,
+    certificacion_info_id: 2,
+  },
+  {
+    resume_id: 1,
+    certificacion_info_id: 3,
+  },
+  {
+    resume_id: 1,
+    certificacion_info_id: 4,
+  },
+  {
+    resume_id: 1,
+    certificacion_info_id: 5,
   },
 ];
 
@@ -70,12 +182,54 @@ const work_info = [
     sort_order: 1,
     current_job: false,
   },
+  {
+    work_title: "Senior Software Engineer",
+    work_company: "Tech Company",
+    work_start_date: new Date("2022-01-01"),
+    work_end_date: new Date("2022-01-01"),
+    work_description: "Lead a team of developers on a new project.",
+    work_location: "Remote",
+    sort_order: 2,
+    current_job: false,
+  },
+  {
+    work_title: "Software Engineer",
+    work_company: "Tech Company",
+    work_start_date: new Date("2018-01-01"),
+    work_end_date: new Date("2020-01-01"),
+    work_description: "Developed and maintained web applications.",
+    work_location: "Remote",
+    sort_order: 3,
+    current_job: false,
+  },
+  {
+    work_title: "Junior Software Engineer",
+    work_company: "Tech Company",
+    work_start_date: new Date("2016-01-01"),
+    work_end_date: new Date("2018-01-01"),
+    work_description: "Developed and maintained web applications.",
+    work_location: "Remote",
+    sort_order: 4,
+    current_job: false,
+  },
 ];
 
 const works_resumes = [
   {
     resume_id: 1,
     work_info_id: 1,
+  },
+  {
+    resume_id: 1,
+    work_info_id: 2,
+  },
+  {
+    resume_id: 1,
+    work_info_id: 3,
+  },
+  {
+    resume_id: 1,
+    work_info_id: 4,
   },
 ];
 
@@ -85,11 +239,32 @@ const link_info = [
     url: "https://github.com/johndoe",
     username: "johndoe",
   },
+  {
+    network_id: 2,
+    url: "https://www.linkedin.com/in/johndoe",
+    username: "johndoe",
+  },
+  {
+    network_id: 3,
+    url: "https://johndoe.com",
+    username: "johndoe",
+  },
 ];
 
 const links_networks = [
   {
     network_name: "GitHub",
+    resume_id: 1,
+    link_infoId: 1,
+  },
+
+  {
+    network_name: "LinkedIn",
+    resume_id: 1,
+    link_infoId: 1,
+  },
+  {
+    network_name: "Portfolio",
     resume_id: 1,
     link_infoId: 1,
   },

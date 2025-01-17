@@ -14,6 +14,20 @@ import {
 } from "@/app/lib/placeholder-data";
 import prisma from "@/app/lib/prisma";
 
+async function clearDatabase() {
+  await prisma.$executeRaw`TRUNCATE TABLE links_networks RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE link_info RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE works_resumes RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE work_info RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE certifications_resumes RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE certificacion_info RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE skills RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE skills_categories RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE resumes RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE resume_user_info RESTART IDENTITY CASCADE`;
+  await prisma.$executeRaw`TRUNCATE TABLE users RESTART IDENTITY CASCADE`;
+}
+
 async function seedUsers() {
   const insertedUsers = await Promise.all(
     users.map(async (user) => {
@@ -168,22 +182,6 @@ async function seedWorksResumes() {
   return insertedWorksResumes;
 }
 
-async function seedLinksNetworks() {
-  const insertedLinksNetworks = await Promise.all(
-    links_networks.map((linkNetwork) =>
-      prisma.links_networks.create({
-        data: {
-          network_name: linkNetwork.network_name,
-          resume_id: linkNetwork.resume_id,
-          link_infoId: linkNetwork.link_infoId,
-        },
-      })
-    )
-  );
-
-  return insertedLinksNetworks;
-}
-
 async function seedLinkInfo() {
   const insertedLinkInfo = await Promise.all(
     link_info.map((link) =>
@@ -200,24 +198,38 @@ async function seedLinkInfo() {
   return insertedLinkInfo;
 }
 
+async function seedLinksNetworks() {
+  const insertedLinksNetworks = await Promise.all(
+    links_networks.map((linkNetwork) =>
+      prisma.links_networks.create({
+        data: {
+          network_name: linkNetwork.network_name,
+          resume_id: linkNetwork.resume_id,
+          link_infoId: linkNetwork.link_infoId,
+        },
+      })
+    )
+  );
+
+  return insertedLinksNetworks;
+}
+
 export async function GET() {
   try {
-    await prisma.$transaction(
-      async () => {
-        await seedUsers();
-        await seedResumeUserInfo();
-        await seedResumes();
-        await seedSkillsCategories();
-        await seedSkills();
-        await seedCertificacionInfo();
-        await seedCertificationsResumes();
-        await seedWorkInfo();
-        await seedWorksResumes();
-        await seedLinksNetworks();
-        await seedLinkInfo();
-      },
-      { timeout: 20000 }
-    );
+    await prisma.$transaction(async () => {
+      await clearDatabase();
+      await seedUsers();
+      await seedResumeUserInfo();
+      await seedResumes();
+      await seedSkillsCategories();
+      await seedSkills();
+      await seedCertificacionInfo();
+      await seedCertificationsResumes();
+      await seedWorkInfo();
+      await seedWorksResumes();
+      await seedLinkInfo();
+      await seedLinksNetworks();
+    }, { timeout: 20000 });
 
     return new Response(
       JSON.stringify({ message: "Database seeded successfully" }),
