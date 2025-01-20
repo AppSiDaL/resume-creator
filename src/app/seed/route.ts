@@ -151,12 +151,12 @@ async function seedWorkInfo() {
     work_info.map((work) =>
       prisma.work_info.create({
         data: {
-          work_title: work.work_title,
-          work_company: work.work_company,
-          work_start_date: work.work_start_date,
-          work_end_date: work.work_end_date,
-          work_description: work.work_description,
-          work_location: work.work_location,
+          title: work.title,
+          company: work.company,
+          start_date: work.start_date,
+          end_date: work.end_date,
+          description: work.description,
+          location: work.location,
           sort_order: work.sort_order,
           current_job: work.current_job,
         },
