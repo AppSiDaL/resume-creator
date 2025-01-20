@@ -1,6 +1,18 @@
+"use client";
 import React from "react";
+import { useAppState, useAppDispatch } from "@/app/StateProvider";
 
 export default function EducationForm() {
+  const state = useAppState();
+  const dispatch = useAppDispatch();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: "SET_FIELD",
+      field: e.target.name,
+      value: e.target.value,
+    });
+  };
   return (
     <div>
       <form className="grid grid-cols-2 gap-4">
