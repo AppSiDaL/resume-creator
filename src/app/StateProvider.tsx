@@ -1,20 +1,8 @@
 "use client";
 import { createContext, useReducer, useContext, ReactNode } from "react";
+import { Action, State } from "@/app/lib/types";
 
-interface State {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  address: string;
-  title: string;
-}
 
-interface Action {
-  type: string;
-  field: string;
-  value: string;
-}
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
