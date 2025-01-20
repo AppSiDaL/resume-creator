@@ -47,6 +47,7 @@ model resumes {
   certifications_resumes certifications_resumes[]
   works_resumes          works_resumes[]
   links_networks         links_networks[]
+  education_resumes      education_resumes[]
 }
 
 model skills_categories {
@@ -87,18 +88,42 @@ model certifications_resumes {
   Certificacion_info certificacion_info @relation(fields: [certificacion_info_id], references: [id])
 }
 
+model education_info {
+  id Int @id @default(autoincrement())
+
+  end_date DateTime
+  degree             String
+  institution        String
+  location           String
+  score              Float
+  score_type         String
+  start_date         DateTime
+  study_type         String
+  sort_order         Int
+  education_resumes  education_resumes[]
+}
+
+model education_resumes {
+  id                Int @id @default(autoincrement())
+  resume_id         Int
+  education_info_id Int
+
+  Resume         resumes        @relation(fields: [resume_id], references: [id])
+  Education_info education_info @relation(fields: [education_info_id], references: [id])
+}
+
 model work_info {
   id Int @id @default(autoincrement())
 
-  work_title       String
-  work_company     String
-  work_start_date  DateTime
-  work_end_date    DateTime
-  work_description String
-  work_location    String
-  sort_order       Int
-  current_job      Boolean
-  works_resumes    works_resumes[]
+  title         String
+  company       String
+  start_date    DateTime
+  end_date      DateTime
+  description   String
+  location      String
+  sort_order    Int
+  current_job   Boolean
+  works_resumes works_resumes[]
 }
 
 model works_resumes {
