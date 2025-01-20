@@ -25,7 +25,7 @@ export default function PersonalInfoForm() {
             type="text"
             id="firstName"
             name="firstName"
-            value={state.firstName}
+            value={state.resume_user_info.user_first_name}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded-md"
           />
@@ -36,7 +36,7 @@ export default function PersonalInfoForm() {
             type="text"
             id="lastName"
             name="lastName"
-            value={state.lastName}
+            value={state.resume_user_info.user_last_name}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded-md"
           />
@@ -47,7 +47,7 @@ export default function PersonalInfoForm() {
             type="email"
             id="email"
             name="email"
-            value={state.email}
+            value={state.resume_user_info.user_email}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded-md"
           />
@@ -58,7 +58,7 @@ export default function PersonalInfoForm() {
             type="tel"
             id="phone"
             name="phone"
-            value={state.phone}
+            value={state.resume_user_info.user_phone}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded-md"
           />
@@ -69,7 +69,7 @@ export default function PersonalInfoForm() {
             type="text"
             id="address"
             name="address"
-            value={state.address}
+            value={state.resume_user_info.user_address}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded-md"
           />
@@ -80,7 +80,7 @@ export default function PersonalInfoForm() {
             type="text"
             id="title"
             name="title"
-            value={state.title}
+            value={state.resume_user_info.user_heading}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded-md"
           />
